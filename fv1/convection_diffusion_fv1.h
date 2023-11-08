@@ -90,6 +90,9 @@ class ConvectionDiffusionFV1 : public ConvectionDiffusionBase<TDomain>
 
 	/// get singular sources and sinks
 		SmartPtr<CDSingularSourcesAndSinks<dim> > sss_manager() {return m_sss_mngr;}
+
+	/// set if the sink should be treated as source
+		void set_only_ssource(bool only_ssource) {m_only_ssource = only_ssource;}
 		
 	/// activates/deactivates the condensed scvf ip's for the FV scheme
 		void set_condensed_FV(bool condensed) {m_bCondensedFV = condensed;}
@@ -259,6 +262,9 @@ class ConvectionDiffusionFV1 : public ConvectionDiffusionBase<TDomain>
     /// singular sources and sinks manager
 		SmartPtr<CDSingularSourcesAndSinks<dim> > m_sss_mngr;
 
+	/// flag to indicate if sink should be treated as source
+		bool m_only_ssource; 
+		
 		using base_type::m_imDiffusion;
 		using base_type::m_imVelocity;
 		using base_type::m_imFlux;

@@ -53,6 +53,7 @@ ConvectionDiffusionFV1(const char* functions, const char* subsets)
    m_spConvShape(new ConvectionShapesNoUpwind<dim>),
    m_bNonRegularGrid(false), m_bCondensedFV(false)
 {
+	m_only_ssource = false;
 	register_all_funcs(m_bNonRegularGrid);
 }
 
@@ -241,7 +242,7 @@ add_sss_jac_elem
 {
 	size_t co = geo.scv(i).node_id ();
 	
-	if (flux < 0.0)
+	if (flux < 0.0 && !m_only_ssource)
 		// sink
 		J(_C_, co, _C_, co) -= flux;
 }
@@ -438,7 +439,7 @@ add_sss_def_elem
 {
 	size_t co = geo.scv(i).node_id ();
 
-	if (flux > 0.0)
+	if (flux > 0.0 || m_only_ssource)
 		// source
 		d(_C_, co) -= flux;
 	else

@@ -189,6 +189,7 @@ static void Domain(TRegistry& reg, string grp)
 			.add_method("set_condensed_FV", &T::set_condensed_FV, "", "[De-]Activates the condensed FV scvf ip's")
 			.add_method("set_upwind", &T::set_upwind, "", "Sets the upwind type for the convective terms")
 			.add_method("set_singular_sources_and_sinks", &T::set_sss_manager, "", "Sets the singular sources and sinks manager")
+			.add_method("set_only_ssource", &T::set_only_ssource, "", "Sets the only_ssource flag")
 			.add_method("singular_sources_and_sinks", &T::sss_manager, "", "Returns the singular sources and sinks manager")
 			.set_construct_as_smart_pointer(true);
 		reg.add_class_to_group(name, "ConvectionDiffusionFV1", tag);
